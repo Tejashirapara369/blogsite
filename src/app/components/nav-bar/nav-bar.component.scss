@@ -1,0 +1,12 @@
+.nav-bar{
+    background-color:  #1565C0;
+    color: #ffffff;
+    top: 0;
+    position: fixed;
+    z-index: 99;
+}
+
+button:focus {
+    outline: none;
+    border: 0;
+}
