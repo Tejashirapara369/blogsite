@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Post } from '../models/post';
-import { AngularFireStore } '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { map } from 'rxjs/operators';
+import { observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BlogService {
 
-  constructor() { }
+  constructor(private db: AngularFirestore) { }
+
+  createPost(post: Post){
+    const postData = JSON.parse(JSON.stringify(post));
+    return this.db.collection('blogs').add(postData);
+  }
 }

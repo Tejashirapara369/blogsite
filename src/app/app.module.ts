@@ -6,13 +6,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular'; 
 
 import { environment } from '../environments/environment';
 
 import { NgMaterialModule } from '../app/ng-material/ng-material.module';
 
 import { AppComponent } from './app.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { HomeComponent } from './components/home/home.component';
 import { BlogEditorComponent } from './components/blog-editor/blog-editor.component';
 
@@ -20,6 +21,7 @@ import { BlogEditorComponent } from './components/blog-editor/blog-editor.compon
   declarations: [
     AppComponent,
     HomeComponent,
+    NavBarComponent,
     BlogEditorComponent
   ],
   imports: [
@@ -31,8 +33,10 @@ import { BlogEditorComponent } from './components/blog-editor/blog-editor.compon
     FormsModule,
     CKEditorModule,
     RouterModule.forRoot([
-      {path:'', component: HomeComponent, pathMatch:'full' },
-      {path:'**', component: HomeComponent}
+      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'addPost', component: BlogEditorComponent },
+      { path: '**', component: HomeComponent },
+
     ])
   ],
   providers: [],
