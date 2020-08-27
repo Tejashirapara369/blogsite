@@ -22,6 +22,7 @@ export class BlogEditorComponent implements OnInit {
 
   setEditorConfig() {
     this.ckeConfig = {
+      removePlugins:['ImageUpload', 'MediaEmbed'],
       heading: {
         options: [
           { model: 'paragraph', title: 'Paragraph', class: 'ckheading_paragraph' },

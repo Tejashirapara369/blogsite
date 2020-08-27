@@ -16,13 +16,21 @@ import { AppComponent } from './app.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { HomeComponent } from './components/home/home.component';
 import { BlogEditorComponent } from './components/blog-editor/blog-editor.component';
+import { ExcerptPipe } from './customPipes/excerpt.pipe';
+import { SlugPipe } from './customPipes/slug.pipe';
+import { BlogCardComponent } from './components/blog-card/blog-card.component';
+import { BlogComponent } from './components/blog/blog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavBarComponent,
-    BlogEditorComponent
+    BlogEditorComponent,
+    ExcerptPipe,
+    SlugPipe,
+    BlogCardComponent,
+    BlogComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +43,7 @@ import { BlogEditorComponent } from './components/blog-editor/blog-editor.compon
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'addPost', component: BlogEditorComponent },
+      { path: 'blog/:id/:slug', component: BlogComponent },
       { path: '**', component: HomeComponent },
 
     ])
