@@ -33,4 +33,13 @@ export class BlogService {
     }));
     return blogs;
   }
+
+  deletePost(postId: string){
+    return this.db.doc('blogs/' + postId).delete();
+  }
+
+  updatePost(postId: string, post: Post){
+    const putData = JSON.parse(JSON.stringify(post));
+    return this.db.doc('blogs/' + postId).update(putData);
+  }
 }

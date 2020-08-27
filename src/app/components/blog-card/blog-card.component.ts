@@ -3,6 +3,7 @@ import { BlogService } from 'src/app/services/blog.service';
 import { Post } from 'src/app/models/post';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import{ SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'app-blog-card',
@@ -11,7 +12,8 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class BlogCardComponent implements OnInit, OnDestroy {
 
-  constructor(private blogService: BlogService) { }
+  constructor(private blogService: BlogService,
+    private snackBarService: SnackbarService) { }
 
   blogPost: Post[] = [];
   private unsubscribe$ = new Subject<void>();
@@ -34,6 +36,12 @@ export class BlogCardComponent implements OnInit, OnDestroy {
   }
 
   delete(postId: string){
-    
+    if(confirm('Are you sure')){
+      this.blogService.deletePost(postId).then(
+        () => {
+          this.snackBarService.showSnackBar('Blog post deleted successfully');
+        }
+      )
+    }
   }
 }
