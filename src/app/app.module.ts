@@ -1,12 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AngularFireModule, FirebaseApp } from '@angular/fire';
+import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular'; 
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { environment } from '../environments/environment';
 
@@ -20,6 +22,7 @@ import { ExcerptPipe } from './customPipes/excerpt.pipe';
 import { SlugPipe } from './customPipes/slug.pipe';
 import { BlogCardComponent } from './components/blog-card/blog-card.component';
 import { BlogComponent } from './components/blog/blog.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,8 @@ import { BlogComponent } from './components/blog/blog.component';
     ExcerptPipe,
     SlugPipe,
     BlogCardComponent,
-    BlogComponent
+    BlogComponent,
+    PaginatorComponent
   ],
   imports: [
     BrowserModule,
@@ -40,11 +44,14 @@ import { BlogComponent } from './components/blog/blog.component';
     NgMaterialModule,
     FormsModule,
     CKEditorModule,
+    NgxPaginationModule,
+    AngularFireAuthModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'addPost', component: BlogEditorComponent },
       { path: 'blog/:id/:slug', component: BlogComponent },
       { path: 'editpost/:id', component: BlogEditorComponent },
+      { path: 'page/:pagenum', component: HomeComponent},
       { path: '**', component: HomeComponent },
 
     ])
