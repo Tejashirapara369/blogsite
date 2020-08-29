@@ -9,12 +9,12 @@ import { AppUser } from 'src/app/models/appuser';
 })
 export class NavBarComponent implements OnInit {
 
-  appuser: AppUser;
+  appUser: AppUser;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.authService.appUser$.subscribe(appUser => this.appuser = appUser);
+    this.authService.appUser$.subscribe(appUser => this.appUser = appUser);
   }
 
   login(){

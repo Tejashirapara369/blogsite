@@ -7,6 +7,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { AuthService } from 'src/app/services/auth.service';
+import { AppUser } from 'src/app/models/appuser';
 
 @Component({
   selector: 'app-blog-editor',
@@ -21,6 +23,7 @@ export class BlogEditorComponent implements OnInit {
   postData = new Post();
   postId = '';
   formTitle = 'Add';
+  appUser: AppUser;
   private unsubscribe$ = new Subject<void>();
 
   setEditorConfig() {
@@ -44,6 +47,7 @@ export class BlogEditorComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private datePipe: DatePipe,
     private router: Router,
+    private authService: AuthService,
     private blogService: BlogService) { 
       if (this.route.snapshot.params['id']) {
         this.postId = this.route.snapshot.paramMap.get('id');
@@ -60,10 +64,12 @@ export class BlogEditorComponent implements OnInit {
           result => { this.setPostFormData(result); }
         );
     }
+    this.authService.appUser$.subscribe(appUser => this.appUser = appUser);
   }
 
   saveBlogPost() {
     this.postData.createdDate = this.datePipe.transform(Date.now(), 'MM-dd-yyyy HH:mm');
+    this.postData.author = this.appUser.name;
     this.blogService.createPost(this.postData).then(
       () => {
         this.router.navigate(['/']);
