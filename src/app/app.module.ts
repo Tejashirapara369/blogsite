@@ -9,6 +9,9 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular'; 
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ShareButtonsConfig, ShareModule } from '@ngx-share/core';   
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';   
+import { HttpClientModule } from '@angular/common/http'; 
 
 import { AuthGuard } from './guards/auth.guard';
 import { AdminAuthGuard } from './guards/admin-auth.guard';
@@ -28,8 +31,12 @@ import { BlogCardComponent } from './components/blog-card/blog-card.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { ScrollerComponent } from './components/scroller/scroller.component';
+import { SocialShareComponent } from './components/social-share/social-share.component';
 import { CommentsComponent } from './components/comments/comments.component';
 
+const customConfig: ShareButtonsConfig = {     
+  twitterAccount: 'tejas_369'   
+}; 
 
 @NgModule({
   declarations: [
@@ -44,6 +51,7 @@ import { CommentsComponent } from './components/comments/comments.component';
     PaginatorComponent,
     AuthorProfileComponent,
     ScrollerComponent,
+    SocialShareComponent,
     CommentsComponent
   ],
   imports: [
@@ -56,6 +64,9 @@ import { CommentsComponent } from './components/comments/comments.component';
     CKEditorModule,
     NgxPaginationModule,
     AngularFireAuthModule,
+    HttpClientModule,        
+    FontAwesomeModule,        
+    ShareModule.withConfig(customConfig), 
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'addPost', component: BlogEditorComponent, canActivate:[AuthGuard] },
