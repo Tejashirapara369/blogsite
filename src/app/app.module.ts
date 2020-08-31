@@ -27,6 +27,8 @@ import { SlugPipe } from './customPipes/slug.pipe';
 import { BlogCardComponent } from './components/blog-card/blog-card.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
+import { ScrollerComponent } from './components/scroller/scroller.component';
+import { CommentsComponent } from './components/comments/comments.component';
 
 
 @NgModule({
@@ -40,7 +42,9 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
     BlogCardComponent,
     BlogComponent,
     PaginatorComponent,
-    AuthorProfileComponent
+    AuthorProfileComponent,
+    ScrollerComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,
